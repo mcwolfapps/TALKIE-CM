@@ -1,0 +1,8 @@
+{
+  "name": "TALKIE-CM",
+  "description": "Tactical situational awareness interface with real-time radar, geolocation tracking, and multi-node voice comms.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}
