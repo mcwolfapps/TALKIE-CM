@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { AppState, IntercomConfig, AppTheme, AppStateType, UserPresence } from './types';
-import AudioVisualizer from './components/AudioVisualizer';
+import { AppState, IntercomConfig, AppTheme, AppStateType, UserPresence } from './types.ts';
+import AudioVisualizer from './components/AudioVisualizer.tsx';
 
 declare const mqtt: any;
 
@@ -47,7 +47,6 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Intentar obtener GPS al inicio
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => setMyCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
@@ -160,7 +159,6 @@ const App: React.FC = () => {
         <div className="absolute w-full h-full border-l border-current/10"></div>
         <div className="absolute w-full h-full border-t border-current/10"></div>
         
-        {/* Marcador propio */}
         <div className="w-3 h-3 bg-current rounded-full z-20 shadow-[0_0_15px_currentColor]"></div>
 
         {Object.values(otherUsers).map((user: UserPresence) => (
@@ -175,7 +173,6 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col h-screen w-full relative select-none" style={{ backgroundColor: currentTheme.background, color: currentTheme.text }}>
       
-      {/* HEADER */}
       <header className="p-3 sm:p-4 flex justify-between items-center border-b border-current/20 bg-black/90 z-50">
         <div className="flex items-center gap-3">
             <div className="w-10 h-10 border-2 border-current flex items-center justify-center font-black italic bg-current/5">W</div>
@@ -193,7 +190,6 @@ const App: React.FC = () => {
 
       <main className="flex-1 p-3 flex flex-col gap-4 overflow-hidden relative z-10">
         
-        {/* PANEL DE ESTADO */}
         <div className="flex-1 flex flex-col lg:flex-row gap-4 overflow-hidden">
             <div className="flex flex-col items-center justify-center bg-black/40 border border-current/10 p-4 lg:w-72 shrink-0">
                 <span className="text-[8px] font-black opacity-30 mb-4 tracking-widest uppercase">360_TACTICAL_SCAN</span>
@@ -219,7 +215,6 @@ const App: React.FC = () => {
             </div>
         </div>
 
-        {/* CONTROLES */}
         <div className="flex flex-col items-center gap-4 shrink-0 pb-4">
             {appState === 'IDLE' ? (
                 <div className="w-full max-w-sm space-y-4 p-6 border-2 border-current/30 bg-current/5">
@@ -254,7 +249,6 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      {/* FOOTER */}
       <footer className="p-2 border-t border-current/10 bg-black text-[7px] font-black flex justify-between items-center z-50">
           <div className="opacity-50 uppercase tracking-widest">
               OP: {config.username} | STABLE_LINK
@@ -265,7 +259,6 @@ const App: React.FC = () => {
           </div>
       </footer>
 
-      {/* AJUSTES */}
       {showSettings && (
           <div className="fixed inset-0 z-[200] bg-black/98 p-6 flex flex-col items-center justify-center backdrop-blur-3xl overflow-y-auto">
               <div className="w-full max-w-md space-y-8">
