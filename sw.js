@@ -1,4 +1,4 @@
-const CACHE_NAME = 'talkie-v4.0-stable';
+const CACHE_NAME = 'talkie-v6.0-stable';
 const ASSETS = [
   './',
   './index.html',
@@ -25,6 +25,7 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  // No cachear tráfico MQTT o del Broker para evitar fallos de conexión
   if (e.request.url.includes('mqtt') || e.request.url.includes('broker') || e.request.url.includes('hivemq')) return;
   
   e.respondWith(

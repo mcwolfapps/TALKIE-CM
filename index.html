@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>TALKIE-CM | RADIO TÁCTICA PREMIUM</title>
+    <title>WOLF-TAC | COMM-UNIT</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#10b981">
@@ -35,8 +35,8 @@
         }
 
         .wolf-logo {
-            width: 150px; height: 150px;
-            border: 4px solid var(--primary);
+            width: 120px; height: 120px;
+            border: 3px solid var(--primary);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             position: relative;
@@ -46,23 +46,23 @@
 
         @keyframes pulse-glow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
-            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(16, 185, 129, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(16, 185, 129, 0.4); }
         }
 
         .loading-bar {
-            width: 200px; height: 2px;
+            width: 180px; height: 1px;
             background: rgba(16, 185, 129, 0.1);
-            margin-top: 50px;
+            margin-top: 40px;
             position: relative; overflow: hidden;
         }
         .loading-fill {
             position: absolute; height: 100%;
             background: var(--primary);
-            width: 60%;
-            animation: slide 1.5s infinite linear;
+            width: 40%;
+            animation: slide 1.2s infinite linear;
         }
         @keyframes slide {
-            from { left: -60%; } to { left: 100%; }
+            from { left: -40%; } to { left: 100%; }
         }
     </style>
 
@@ -82,12 +82,12 @@
 <body>
     <div id="boot-screen">
         <div class="wolf-logo">
-            <span style="font-size: 24px; font-weight: 900; letter-spacing: 6px; font-style: italic;">WOLF</span>
+            <span style="font-size: 20px; font-weight: 900; letter-spacing: 4px; font-style: italic;">WOLF</span>
         </div>
         <div class="loading-bar">
             <div class="loading-fill"></div>
         </div>
-        <p style="margin-top: 20px; font-size: 10px; font-weight: 800; letter-spacing: 5px; opacity: 0.6;">INITIALIZING_CORE...</p>
+        <p style="margin-top: 15px; font-size: 9px; font-weight: 800; letter-spacing: 4px; opacity: 0.5;">BOOTING_CORE_V8</p>
     </div>
 
     <div id="root"></div>
@@ -95,22 +95,17 @@
     <script type="module" src="./index.tsx"></script>
 
     <script>
-      // Listener global para capturar errores de arranque y limpiar la pantalla de carga
+      // Fallback para remover el loader manualmente si algo falla
       window.addEventListener('error', function(e) {
-        if (e.message.includes('React error #31')) {
-           console.warn("React version mismatch detected and handled.");
-        }
         const loader = document.getElementById('boot-screen');
         if (loader) {
             loader.style.opacity = '0';
             setTimeout(() => { loader.style.display = 'none'; }, 500);
         }
       });
-
-      // Seguro de vida: oculta el loader tras 5 segundos pase lo que pase
       setTimeout(() => {
         const loader = document.getElementById('boot-screen');
-        if (loader && loader.style.opacity !== '0') {
+        if (loader && loader.style.display !== 'none') {
             loader.style.opacity = '0';
             setTimeout(() => { loader.style.display = 'none'; }, 500);
         }
